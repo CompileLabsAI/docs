@@ -1,0 +1,67 @@
+---
+title: "Models"
+description: "Browse all available AI models across different modalities"
+icon: "brain"
+---
+
+## Overview
+
+Compile Labs provides access to leading AI models from top providers across multiple modalities. All models are accessible through our unified API.
+
+## Modalities
+
+Browse models by modality:
+
+<CardGroup cols={2}>
+
+<Card title="Text Models" icon="comments" href="/text-models">
+Language models for chat completions, understanding, and text generation
+</Card>
+
+<Card title="Image Models" icon="image" href="/image-models">
+Image generation models for creating images from text prompts
+</Card>
+
+</CardGroup>
+
+## Listing All Models
+
+Get a complete list of all available models via API:
+
+```bash
+# List all text models
+curl "https://api.compilelabs.ai/v1/models?type=text_to_text" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# List all image generation models
+curl "https://api.compilelabs.ai/v1/models?type=text_to_image" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Model Status
+
+- **Active**: Currently available for use
+- **Pending**: Under review / not yet available
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="Providers" icon="layer-group" href="/providers">
+Learn about our AI providers
+</Card>
+
+<Card title="Chat Completions" icon="comments" href="/modalities/chat-completions-openai">
+Start using models
+</Card>
+
+<Card title="Image Generation" icon="image" href="/modalities/image-generation">
+Generate images
+</Card>
+
+<Card title="Examples" icon="code" href="/examples">
+See code examples
+</Card>
+
+</CardGroup>
+

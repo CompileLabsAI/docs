@@ -1,0 +1,181 @@
+---
+title: "Errors"
+description: "Understand and handle API errors"
+icon: "exclamation-triangle"
+---
+
+## Overview
+
+This guide covers common errors and how to handle them when using the Compile Labs API.
+
+## Error Response Format
+
+All errors follow a consistent format:
+
+```json
+{
+  "error": {
+    "message": "Error description",
+    "type": "invalid_request_error",
+    "code": "invalid_api_key",
+    "status": 401
+  }
+}
+```
+
+## Common Errors
+
+### Authentication Errors
+
+#### Invalid API Key
+
+```json
+{
+  "error": {
+    "message": "Invalid API key",
+    "type": "authentication_error",
+    "code": "invalid_api_key",
+    "status": 401
+  }
+}
+```
+
+**Solution**: Check your API key is correct and includes the `Bearer ` prefix.
+
+#### Missing API Key
+
+```json
+{
+  "error": {
+    "message": "Missing API key",
+    "type": "authentication_error",
+    "code": "missing_api_key",
+    "status": 401
+  }
+}
+```
+
+**Solution**: Include the `Authorization` header with your API key.
+
+### Rate Limit Errors
+
+```json
+{
+  "error": {
+    "message": "Rate limit exceeded",
+    "type": "rate_limit_error",
+    "code": "rate_limit_exceeded",
+    "status": 429
+  }
+}
+```
+
+**Solution**: Implement exponential backoff and retry logic.
+
+```python
+import time
+
+def handle_rate_limit(func, max_retries=3):
+    for attempt in range(max_retries):
+        try:
+            return func()
+        except RateLimitError as e:
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt
+                time.sleep(wait_time)
+            else:
+                raise
+```
+
+### Invalid Request
+
+#### Invalid Model
+
+```json
+{
+  "error": {
+    "message": "Invalid model: unknown/model",
+    "type": "invalid_request_error",
+    "code": "invalid_model",
+    "status": 400
+  }
+}
+```
+
+**Solution**: Use a valid model identifier. List available models at `/v1/models`.
+
+#### Invalid Parameters
+
+```json
+{
+  "error": {
+    "message": "Invalid temperature value",
+    "type": "invalid_request_error",
+    "code": "invalid_parameter",
+    "status": 400
+  }
+}
+```
+
+**Solution**: Verify parameter ranges (temperature: 0-2, max_tokens: positive integer).
+
+### Insufficient Credits
+
+```json
+{
+  "error": {
+    "message": "Insufficient credits",
+    "type": "payment_error",
+    "code": "insufficient_credits",
+    "status": 402
+  }
+}
+```
+
+**Solution**: Add credits to your account or upgrade your plan.
+
+### Model Unavailable
+
+```json
+{
+  "error": {
+    "message": "Model temporarily unavailable",
+    "type": "api_error",
+    "code": "model_unavailable",
+    "status": 503
+  }
+}
+```
+
+**Solution**: Retry the request or use an alternative model.
+
+## HTTP Status Codes
+
+- **200**: Success
+- **400**: Bad Request - Invalid parameters
+- **401**: Unauthorized - Invalid or missing API key
+- **402**: Payment Required - Insufficient credits
+- **403**: Forbidden - Access denied
+- **404**: Not Found - Resource doesn't exist
+- **429**: Too Many Requests - Rate limit exceeded
+- **500**: Internal Server Error - Server issue
+- **503**: Service Unavailable - Model unavailable
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="Examples" icon="code" href="/examples">
+See error handling examples
+</Card>
+
+<Card title="API Reference" icon="book" href="/api-reference">
+Complete API documentation
+</Card>
+
+<Card title="Support" icon="question-circle" href="mailto:support@compilelabs.ai">
+Get help with errors
+</Card>
+
+</CardGroup>
+

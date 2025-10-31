@@ -1,0 +1,192 @@
+---
+title: "Anthropic"
+description: "Code examples for using Anthropic Claude models"
+icon: "code"
+---
+
+## Anthropic-Compatible API
+
+Compile Labs provides full compatibility with the Anthropic API, allowing you to use Claude models with the same interface you're familiar with.
+
+## Chat Completions
+
+```bash
+curl https://api.compilelabs.ai/v1/messages \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "anthropic/claude-sonnet-4.5",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Hello, how are you?"}
+    ]
+  }'
+```
+
+## Streaming Responses
+
+```bash
+curl https://api.compilelabs.ai/v1/messages \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "anthropic/claude-sonnet-4.5",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Tell me a story"}
+    ],
+    "stream": true
+  }'
+```
+
+## Using Anthropic Python SDK
+
+```python
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.compilelabs.ai/v1"
+)
+
+response = client.messages.create(
+    model="anthropic/claude-sonnet-4.5",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "Explain quantum computing"}
+    ]
+)
+
+print(response.content[0].text)
+```
+
+## Streaming with Python SDK
+
+```python
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.compilelabs.ai/v1"
+)
+
+with client.messages.stream(
+    model="anthropic/claude-sonnet-4.5",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "Tell me a story"}
+    ]
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
+```
+
+## System Prompts
+
+```python
+response = client.messages.create(
+    model="anthropic/claude-sonnet-4.5",
+    max_tokens=1024,
+    system="You are a helpful coding assistant specialized in Python.",
+    messages=[
+        {"role": "user", "content": "Write a function to calculate fibonacci numbers"}
+    ]
+)
+
+print(response.content[0].text)
+```
+
+## Multi-Turn Conversations
+
+```python
+messages = [
+    {"role": "user", "content": "What is the capital of France?"},
+    {"role": "assistant", "content": "The capital of France is Paris."},
+    {"role": "user", "content": "What is its population?"}
+]
+
+response = client.messages.create(
+    model="anthropic/claude-sonnet-4.5",
+    max_tokens=1024,
+    messages=messages
+)
+
+print(response.content[0].text)
+```
+
+## Using Different Claude Models
+
+Compile Labs supports multiple Claude models:
+
+```python
+# Claude Sonnet 4.5 (Latest)
+sonnet_response = client.messages.create(
+    model="anthropic/claude-sonnet-4.5",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}]
+)
+
+# Claude Sonnet 4
+sonnet4_response = client.messages.create(
+    model="anthropic/claude-sonnet-4",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}]
+)
+
+# Claude Haiku 4.5
+haiku_response = client.messages.create(
+    model="anthropic/claude-haiku-4.5",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}]
+)
+```
+
+## Temperature and Sampling
+
+```python
+response = client.messages.create(
+    model="anthropic/claude-sonnet-4.5",
+    max_tokens=1024,
+    temperature=0.7,
+    top_p=0.9,
+    messages=[
+        {"role": "user", "content": "Write a creative story about space exploration"}
+    ]
+)
+```
+
+## SDK Compatibility
+
+Compile Labs is compatible with:
+
+- **Anthropic SDK** (`anthropic` Python package)
+- **Any Anthropic-compatible library**
+
+<Info>
+Use your existing Anthropic SDK code with Compile Labs - just change the `base_url` to `https://api.compilelabs.ai/v1` and you're ready to go!
+</Info>
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="OpenAI Examples" icon="code" href="/examples/openai">
+Learn OpenAI API examples
+</Card>
+
+<Card title="Image Generation" icon="image" href="/examples/image-generation">
+Generate images with AI models
+</Card>
+
+<Card title="Chat Completions" icon="comments" href="/modalities/chat-completions-anthropic">
+Deep dive into Anthropic chat functionality
+</Card>
+
+<Card title="API Reference" icon="code" href="/api-reference">
+Browse complete API documentation
+</Card>
+
+</CardGroup>
+

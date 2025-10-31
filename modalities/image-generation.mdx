@@ -1,0 +1,159 @@
+---
+title: "Image Generation"
+description: "Generate images using advanced AI models"
+icon: "image"
+---
+
+## Overview
+
+Generate stunning images from text prompts using leading image generation models from providers like Black Forest Labs, Stability AI, and more.
+
+## Quick Start
+
+```bash
+curl https://api.compilelabs.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "black-forest-labs/flux-1-schnell",
+    "prompt": "A beautiful sunset over the ocean"
+  }'
+```
+
+## Supported Models
+
+- **Black Forest Labs**: Flux 1 Schnell
+- **Stability AI**: SDXL, SD 2.1
+- **Qwen**: Qwen Image
+- [See more available image models here](/models)
+
+## Parameters
+
+- **model**: The image generation model to use
+- **prompt**: Text description of desired image
+- **size**: Output dimensions (e.g., "1024x1024")
+- **n**: Number of images to generate (1-4)
+- **response_format**: "url" or "b64_json"
+
+## Example
+
+```python
+import openai
+
+client = openai.OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.compilelabs.ai/v1"
+)
+
+response = client.images.generate(
+    model="black-forest-labs/flux-1-schnell",
+    prompt="A sleek modern laptop on a desk with natural lighting, minimalist style",
+    size="1024x1024",
+    n=1
+)
+
+print(response.data[0].url)
+```
+
+## Listing Available Models
+
+Get a list of all available image generation models:
+
+```bash
+curl "https://api.compilelabs.ai/v1/models?type=text_to_image" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Common Image Sizes
+
+Different models support different output sizes:
+
+### Standard Sizes
+
+- **1024x1024**: 1 megapixel - Fastest, most common size
+- **1024x1792**: ~1.8 megapixels - Portrait orientation
+- **1792x1024**: ~1.8 megapixels - Landscape orientation
+- **2048x2048**: 4 megapixels - Higher quality
+
+### Example
+
+```bash
+curl https://api.compilelabs.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "black-forest-labs/flux-1-schnell",
+    "prompt": "A futuristic cityscape",
+    "size": "1024x1024"
+  }'
+```
+
+## Pricing Examples
+
+Image generation is billed per megapixel. Here are approximate costs for common models and sizes:
+
+### Flux 1 Schnell
+- **1024x1024** (1 MP): ~$0.003 per image
+- **1024x1792** (1.8 MP): ~$0.005 per image
+- **2048x2048** (4 MP): ~$0.012 per image
+
+### Stable Diffusion XL (SDXL)
+- **1024x1024** (1 MP): ~$0.02 per image
+- **1024x1792** (1.8 MP): ~$0.036 per image
+
+### Qwen Image
+- **1024x1024** (1 MP): ~$0.02 per image
+- **2048x2048** (4 MP): ~$0.08 per image
+
+## Saving Images from Base64
+
+Instead of using URLs, you can request images in base64 format and save them directly:
+
+```python
+import openai
+import base64
+
+client = openai.OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.compilelabs.ai/v1"
+)
+
+response = client.images.generate(
+    model="black-forest-labs/flux-1-schnell",
+    prompt="A beautiful sunset over the ocean",
+    size="1024x1024",
+    n=1,
+    response_format="b64_json"
+)
+
+# Decode base64 and save the image
+image_data = base64.b64decode(response.data[0].b64_json)
+
+with open("generated_image.png", "wb") as f:
+    f.write(image_data)
+
+print("Image saved as generated_image.png")
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="OpenAI Chat Completions" icon="comments" href="/modalities/chat-completions-openai">
+Build conversational AI
+</Card>
+
+<Card title="Examples" icon="code" href="/examples">
+See more image generation examples
+</Card>
+
+<Card title="API Reference" icon="book" href="/api-reference">
+Complete API documentation
+</Card>
+
+<Card title="Billing" icon="credit-card" href="/billing">
+View usage and pricing
+</Card>
+
+</CardGroup>
+

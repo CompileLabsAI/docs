@@ -1,0 +1,125 @@
+---
+title: "Billing & Usage"
+description: "Manage billing and track usage across models and teams"
+icon: "credit-card"
+---
+
+## Overview
+
+Compile Labs provides transparent usage-based billing. Pay only for what you use, with detailed tracking across all models and providers.
+
+## Usage-Based Pricing
+
+All models are priced on a pay-as-you-go basis:
+
+- **Text Models**: Per token (input + output)
+- **Image Models**: Per image generated
+- **No monthly fees or commitments**
+
+## Billing Modes: Prepaid vs Postpaid
+
+- **Prepaid (default)**
+  - Increase your org limit by topping up credits: Settings → Billing → Add Credits.
+  - Credits increase your organization credit limit; usage is blocked once the limit is reached.
+  - You can still set optional member/API key limits for finer control.
+
+- **Postpaid (On‑Demand Usage)**
+  - Enable via Settings → Billing → On‑Demand Usage toggle (requires an active Business or above subscription).
+  - Organization‑level limit isn’t enforced; usage is billed in arrears.
+  - Member/API key limits, if set, still apply and can cap usage per user/key.
+
+## Viewing Usage
+
+### Via Dashboard
+
+1. Go to [app.compilelabs.ai](https://app.compilelabs.ai)
+2. Navigate to **Usage** dashboard
+3. View real-time usage, costs, and trends
+
+### Via API
+
+```bash
+# Get usage balance for organization
+curl https://api.compilelabs.ai/v1/orgs/{org_id}/usage-balance \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# Get usage events for a user
+curl "https://api.compilelabs.ai/v1/orgs/{org_id}/users/{user_id}/usage?start_time_unix=1609459200&end_time_unix=1640995200" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Example Usage Balance Response
+
+```json
+{
+  "org_usage_balance": {
+    "name": "My Organization",
+    "email": "billing@example.com",
+    "credit_limit": 1000.0,
+    "credit_count": 875.5,
+    "next_credit_reset_unix": 1640995200,
+    "previous_credit_reset_unix": 1609459200
+  },
+  "user_usage_balances": {
+    "user_123": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "credit_limit": 500.0,
+      "credit_count": 450.25,
+      "reset_period": "monthly",
+      "api_key_usage_balances": [...]
+    }
+  }
+}
+```
+
+## Usage Analytics
+
+Get detailed usage analytics for a user:
+
+```bash
+curl "https://api.compilelabs.ai/v1/orgs/{org_id}/users/{user_id}/usage-analytics?window=1d" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Billing Alerts
+
+Set up alerts to monitor spending:
+
+1. Go to **Settings** → **Billing**
+2. Set monthly spending limits
+3. Get notified when approaching limits
+
+## Payment Methods
+
+- **Credit Card**: Visa, Mastercard, Amex (processed via Stripe)
+- **Invoice**: Enterprise accounts
+
+We use Stripe to securely process credit card payments and Lago as our billing engine for accurate usage tracking and invoicing.
+
+## Organization Billing
+
+For organizations, billing is centralized:
+
+- Team usage rolls up to organization
+- Single invoice for all team activity
+- Individual usage tracking per member, API key, or service account API key
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="Organizations" icon="users" href="/organizations">
+Set up organization billing
+</Card>
+
+<Card title="API Keys" icon="key" href="/api-keys">
+Manage access and costs
+</Card>
+
+<Card title="Quotas" icon="chart-line" href="/quotas">
+Manage quotas and cost tracking
+</Card>
+
+</CardGroup>
+
