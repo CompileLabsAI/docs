@@ -1,0 +1,125 @@
+---
+title: "Chat Completions (OpenAI)"
+description: "Build chat-based AI applications using OpenAI-compatible API"
+icon: "comments"
+---
+
+## Overview
+
+Chat completions are the primary interface for text generation and conversational AI. Use the OpenAI-compatible API to access language models from leading providers.
+
+## Quick Start
+
+```bash
+curl https://api.compilelabs.ai/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "moonshotai/kimi-k2-0905",
+    "messages": [
+      {"role": "user", "content": "Hello! What can you do?"}
+    ]
+  }'
+```
+
+## Using the OpenAI Python SDK
+
+```python
+import openai
+
+client = openai.OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.compilelabs.ai/v1"
+)
+
+response = client.chat.completions.create(
+    model="moonshotai/kimi-k2-0905",
+    messages=[
+        {"role": "user", "content": "Hello!"}
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+## Core Concepts
+
+### Messages
+
+Messages are organized by role:
+- `system`: Instructions for the assistant's behavior
+- `user`: User inputs and queries
+- `assistant`: Previous assistant responses
+
+### Parameters
+
+ - **model**: The model to use (e.g., `moonshotai/kimi-k2-0905`)
+- **messages**: Array of message objects
+- **temperature**: Randomness (0-2, default 1)
+- **max_tokens**: Maximum response length
+- **stream**: Return streaming response
+
+## Streaming
+
+Stream responses for better user experience:
+
+```bash
+curl https://api.compilelabs.ai/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "moonshotai/kimi-k2-0905",
+    "messages": [
+      {"role": "user", "content": "Tell me a long story"}
+    ],
+    "stream": true
+  }'
+```
+
+## Multi-Turn Conversations
+
+```python
+messages = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "What's 2+2?"},
+    {"role": "assistant", "content": "2+2 equals 4."},
+    {"role": "user", "content": "What about 3+3?"}
+]
+
+response = client.chat.completions.create(
+    model="moonshotai/kimi-k2-0905",
+    messages=messages
+)
+```
+
+## Listing Available Models
+
+Get a list of all available models:
+
+```bash
+curl "https://api.compilelabs.ai/v1/models?type=text_to_text" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="Anthropic Chat Completions" icon="comments" href="/modalities/chat-completions-anthropic">
+Use Anthropic-compatible API
+</Card>
+
+<Card title="Image Generation" icon="image" href="/modalities/image-generation">
+Generate images with AI models
+</Card>
+
+<Card title="Examples" icon="code" href="/examples">
+See more complete examples
+</Card>
+
+<Card title="API Reference" icon="book" href="/api-reference">
+Full API documentation
+</Card>
+
+</CardGroup>
+

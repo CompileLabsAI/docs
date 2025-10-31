@@ -1,15 +1,15 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Compile Labs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#5B2C6F",
+    "light": "#7D3C98",
+    "dark": "#3D1C4A"
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+        "tabs": [
       {
         "tab": "Guides",
         "groups": [
@@ -17,32 +17,83 @@
             "group": "Getting started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "quickstart"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Modalities",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "modalities/chat-completions-openai",
+              "modalities/chat-completions-anthropic",
+              "modalities/image-generation"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Organizations",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "organizations",
+              "service-accounts"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "API Keys & Access",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "api-keys"
+            ]
+          },
+          {
+            "group": "Billing & Usage",
+            "pages": [
+              "billing",
+              "quotas"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "features/streaming",
+              "features/tool-calling",
+              "features/structured-outputs",
+              "features/multimodal",
+              "features/zero-data-retention",
+              "features/zero-completion-insurance"
+            ]
+          },
+          {
+            "group": "Errors",
+            "pages": [
+              "errors"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Examples",
+        "groups": [
+          {
+            "group": "Code Examples",
+            "pages": [
+              "examples/openai",
+              "examples/anthropic",
+              "examples/image-generation"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Models & Providers",
+        "groups": [
+          {
+            "group": "Models",
+            "pages": [
+              "text-models",
+              "image-models"
+            ]
+          },
+          {
+            "group": "Providers",
+            "pages": [
+              "providers"
             ]
           }
         ]
@@ -53,38 +104,12 @@
           {
             "group": "API reference",
             "openapi": "./openapi.json"
-          },
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
           }
         ]
       }
     ],
     "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
+      "anchors": []
     }
   },
   "logo": {
@@ -95,13 +120,13 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@compilelabs.ai"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://app.compilelabs.ai"
     }
   },
   "contextual": {
@@ -118,9 +143,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/compile-labs",
+      "linkedin": "https://linkedin.com/company/compile-labs"
     }
   }
 }

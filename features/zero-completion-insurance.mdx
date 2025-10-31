@@ -1,0 +1,73 @@
+---
+title: "Zero Completion Insurance"
+description: "Never pay for incomplete responses"
+icon: "check-circle"
+---
+
+## Overview
+
+Zero Completion Insurance ensures you only pay for successfully completed API responses. If a request fails, times out, or returns an incomplete response, you won't be charged.
+
+## How It Works
+
+Compile Labs automatically detects and excludes from billing:
+- Failed API requests (errors, timeouts)
+- Incomplete responses
+- Network failures
+- Provider-side errors
+- Partial completions
+
+You only pay for successful, complete responses.
+
+## Automatic Detection
+
+Our system automatically identifies non-billable responses based on:
+
+- **Error Status Codes**: Any HTTP error (4xx, 5xx) is not billed
+- **Incomplete Streams**: Streaming responses that don't complete
+- **Timeout Errors**: Requests that exceed time limits
+- **Provider Failures**: Errors from the underlying AI provider
+- **Partial Content**: Responses cut off mid-generation
+
+## Billing
+
+- ✅ **Charge**: Successful, complete responses
+- ❌ **No Charge**: Failed requests, errors, timeouts
+- ❌ **No Charge**: Incomplete or truncated responses
+
+## Benefits
+
+- **Cost Predictability**: Only pay for successful requests
+- **No Waste**: Failed attempts don't add up
+- **Fair Billing**: Pay only for delivered value
+- **Transparent**: Clear distinction in your usage dashboard
+
+## Viewing Usage
+
+In your usage dashboard, you'll see:
+- Total successful requests (billed)
+- Failed requests (not billed)
+- Success rate metrics
+- Cost breakdown by model
+
+## Best Practices
+
+- Monitor your success rate to identify issues
+- Check error logs to improve request quality
+- Use appropriate timeouts for your use case
+- Handle errors gracefully in your application
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="Quotas" icon="chart-line" href="/quotas">
+Monitor your usage and costs
+</Card>
+
+<Card title="Billing" icon="credit-card" href="/billing">
+Understand your billing
+</Card>
+
+</CardGroup>
+

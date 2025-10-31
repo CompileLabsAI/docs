@@ -1,0 +1,179 @@
+---
+title: "Quotas & Cost Tracking"
+description: "Manage spending limits and track costs across your organization"
+icon: "chart-line"
+---
+
+## Overview
+
+Compile Labs uses a flexible quota system with three levels and provides detailed cost tracking to help you manage spending effectively.
+
+## No Platform Fees
+
+Compile Labs charges **zero platform fees**. You only pay for actual usage of AI models. There are no:
+- Minimum commitments
+- Setup fees
+- Platform access fees
+- Hidden charges
+
+You pay exactly what you use, when you use it.
+
+## Quota System
+
+Compile Labs uses a hierarchical quota system with three levels:
+
+1. **Organization Level**: Total spending limit for the entire organization
+2. **Member Level**: Individual user or service account spending limits
+3. **API Key Level**: Per-key spending limits for granular control
+
+### How Quotas Cascade
+
+Quotas cascade from API key → Member → Organization. If an API key has no limit set, it inherits from the member. If a member has no limit, it inherits from the organization.
+
+**Example:**
+```
+Organization Credit Limit: $10,000/month
+├── User A (Member) Credit Limit: $2,000/month
+│   ├── API Key 1: $500/month
+│   └── API Key 2: No limit (inherits from User A's $2,000/month)
+└── User B (Member) Credit Limit: None (inherits from Org's $10,000/month)
+    └── API Key 3: $1,500/month
+```
+
+## Reset Periods
+
+Each quota level can have its own reset period:
+
+- **Daily**: Resets at midnight UTC every day
+- **Monthly**: Resets on the first day of each billing cycle
+- **Never**: No automatic reset, cumulative spending
+
+### Setting Reset Periods
+
+Choose reset periods based on your needs:
+
+- **Daily**: Perfect for development and testing with small, controlled budgets
+- **Monthly**: Standard for production workloads with predictable spending patterns
+- **Never**: For experimental projects where you want to track cumulative spending
+
+## Cost Tracking
+
+Track costs at multiple levels through your dashboard at [app.compilelabs.ai](https://app.compilelabs.ai):
+
+### Organization Overview
+
+View total spending across all users, service accounts, and API keys in your organization. Monitor:
+- Total credits consumed
+- Remaining credit balance
+- Spending trends over time
+- Breakdown by model or user
+
+### User & Service Account Details
+
+Monitor individual usage for:
+- Each human user
+- Each service account
+- Granular cost attribution
+- Usage patterns and anomalies
+
+### API Key Analysis
+
+Track spending per API key to:
+- Identify which keys are driving costs
+- Allocate expenses by project or environment
+- Detect unexpected usage spikes
+- Optimize quota allocation
+
+## Setting Quotas
+
+Set quotas through your dashboard:
+
+### Organization Quotas
+
+1. Navigate to **Settings** → **Billing**
+2. Find the Organization Credit Limit section
+3. Set your desired credit limit
+4. Choose a reset period (Daily, Monthly, or Never)
+5. Save your changes
+
+### Member Quotas
+
+1. Go to **Organizations** → **Members**
+2. Click on the member you want to configure
+3. Scroll to the Credit Limit section
+4. Set the member's credit limit and reset period
+5. Save changes
+
+### API Key Quotas
+
+1. Navigate to **API Keys**
+2. Click on the API key you want to configure
+3. Update the credit limit and reset period
+4. Save changes
+
+## Best Practices
+
+### Start Conservative
+
+Set lower limits initially and increase based on actual usage. This helps prevent unexpected costs while you're learning usage patterns.
+
+### Use API Key Quotas
+
+Set per-key limits for new projects or experimental features. This provides fine-grained control and helps isolate spending.
+
+### Monitor Regularly
+
+Review spending weekly to catch unexpected costs early. Set up dashboard alerts to be notified of unusual patterns.
+
+### Set Alerts
+
+Configure notifications when approaching quota limits. This gives you time to adjust quotas or investigate usage before hitting limits.
+
+### Review Historical Data
+
+Analyze past usage to predict future spending. Use trends to optimize quota allocation across your team.
+
+## Error Codes
+
+When quotas are exceeded, you'll receive clear error messages:
+
+- `api_key_credit_quota_exceeded` - The specific API key has reached its limit
+- `user_credit_quota_exceeded` - The user or service account has reached its limit
+- `organization_credit_quota_exceeded` - The organization has reached its overall limit
+
+Each error includes details about:
+- Which level hit the limit
+- The reset period and next reset time
+- Suggested actions to resolve the issue
+
+## Usage Analytics
+
+View detailed usage analytics through your dashboard:
+
+- **Time Windows**: View usage for the last hour, day, month, or year
+- **By Model**: See which AI models are driving your costs
+- **By User**: Track individual team member spending
+- **Trends**: Identify patterns and growth in usage over time
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="Billing" icon="credit-card" href="/billing">
+Learn about payment methods and invoices
+</Card>
+
+<Card title="Organizations" icon="users" href="/organizations">
+Understand organization structure
+</Card>
+
+<Card title="Service Accounts" icon="key" href="/service-accounts">
+Manage service account quotas
+</Card>
+
+<Card title="API Keys" icon="key" href="/api-keys">
+Configure API key quotas
+</Card>
+
+</CardGroup>
+

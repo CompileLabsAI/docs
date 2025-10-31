@@ -1,0 +1,53 @@
+---
+title: "Tool Calling"
+description: "Enable AI models to call external tools and functions"
+icon: "wrench"
+---
+
+## Overview
+
+Tool calling (also known as function calling) allows AI models to interact with external tools, APIs, and functions during conversations. This enables dynamic, agentic behavior where the AI can retrieve real-time information, perform actions, and execute complex workflows.
+
+## How It Works
+
+When you provide a list of tools to a chat completion, the model can choose to call one or more of those tools based on the conversation context. The model returns a structured request that your application executes, and then you pass the results back to continue the conversation.
+
+## Supported Models
+
+Tool calling is supported by many leading models including:
+- OpenAI models (GPT-4, GPT-3.5)
+- Anthropic Claude models
+- Google Gemini models
+- Meta Llama models
+- And many more
+
+## Use Cases
+
+- **API Integration**: Connect to external services and databases
+- **Real-time Data**: Fetch current information (weather, stock prices, etc.)
+- **Workflow Automation**: Trigger actions in other systems
+- **Agentic Applications**: Build AI agents that can take actions
+- **Code Execution**: Safely execute code or queries
+
+## Best Practices
+
+- Provide clear, detailed function descriptions
+- Define strict parameter schemas
+- Handle errors gracefully when tools fail
+- Consider rate limits when calling external APIs
+- Validate tool outputs before sending back to the model
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="Chat Completions (OpenAI)" icon="comments" href="/modalities/chat-completions-openai">
+Start building with chat
+</Card>
+
+<Card title="Examples" icon="code" href="/examples">
+See more code examples
+</Card>
+
+</CardGroup>
+

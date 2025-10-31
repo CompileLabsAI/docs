@@ -1,0 +1,211 @@
+---
+title: "Image Generation"
+description: "Code examples for generating images with AI models"
+icon: "image"
+---
+
+## Image Generation API
+
+Compile Labs supports multiple image generation models through a unified OpenAI-compatible API.
+
+## Basic Image Generation
+
+```bash
+curl https://api.compilelabs.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "black-forest-labs/flux-1-schnell",
+    "prompt": "A futuristic cityscape at sunset"
+  }'
+```
+
+## Specifying Image Size
+
+```bash
+curl https://api.compilelabs.ai/v1/images/generations \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "black-forest-labs/flux-1-schnell",
+    "prompt": "A serene mountain landscape with a lake",
+    "size": "1024x1024"
+  }'
+```
+
+## Common Image Sizes
+
+- `1024x1024` - Square (standard)
+- `1024x1792` - Portrait
+- `1792x1024` - Landscape
+- `2048x2048` - Large square
+
+## Using OpenAI Python SDK
+
+```python
+import openai
+
+client = openai.OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.compilelabs.ai/v1"
+)
+
+response = client.images.generate(
+    model="black-forest-labs/flux-1-schnell",
+    prompt="A sleek modern laptop on a desk with natural lighting, minimalist style",
+    n=1,
+    size="1024x1024"
+)
+
+image_url = response.data[0].url
+print(f"Generated image: {image_url}")
+```
+
+## Saving Images from Base64
+
+When using `response_format: "b64_json"`, you can save images directly:
+
+```python
+import openai
+import base64
+from pathlib import Path
+
+client = openai.OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.compilelabs.ai/v1"
+)
+
+response = client.images.generate(
+    model="black-forest-labs/flux-1-schnell",
+    prompt="A futuristic robot in a cyberpunk city",
+    response_format="b64_json"
+)
+
+# Decode and save the image
+image_data = base64.b64decode(response.data[0].b64_json)
+Path("generated_image.png").write_bytes(image_data)
+print("Image saved to generated_image.png")
+```
+
+## Generating Multiple Images
+
+```python
+response = client.images.generate(
+    model="black-forest-labs/flux-1-schnell",
+    prompt="Abstract art with vibrant colors",
+    n=4,
+    size="1024x1024"
+)
+
+for idx, image in enumerate(response.data):
+    print(f"Image {idx + 1}: {image.url}")
+```
+
+## Using Different Models
+
+Compile Labs supports multiple image generation models:
+
+```python
+# Flux 1 Schnell (fast, high-quality)
+flux_response = client.images.generate(
+    model="black-forest-labs/flux-1-schnell",
+    prompt="A dragon flying over mountains"
+)
+
+# SDXL (detailed, artistic)
+sdxl_response = client.images.generate(
+    model="stability/sdxl",
+    prompt="A portrait of a warrior in medieval armor"
+)
+
+# Imagen 4 Ultra (photorealistic)
+imagen_response = client.images.generate(
+    model="google/imagen-4-ultra",
+    prompt="A professional product photo of a watch"
+)
+```
+
+## Advanced Options
+
+```python
+response = client.images.generate(
+    model="black-forest-labs/flux-1-schnell",
+    prompt="A peaceful garden with cherry blossoms, soft lighting, 4k quality",
+    n=1,
+    size="1792x1024",
+    response_format="url"
+)
+```
+
+## Batch Image Generation
+
+```python
+prompts = [
+    "A sunset over the ocean",
+    "A mountain peak at dawn",
+    "A city skyline at night",
+    "A forest path in autumn"
+]
+
+images = []
+for prompt in prompts:
+    response = client.images.generate(
+        model="black-forest-labs/flux-1-schnell",
+        prompt=prompt,
+        size="1024x1024"
+    )
+    images.append(response.data[0].url)
+
+print(f"Generated {len(images)} images")
+```
+
+## Error Handling
+
+```python
+try:
+    response = client.images.generate(
+        model="black-forest-labs/flux-1-schnell",
+        prompt="A beautiful landscape"
+    )
+    print(f"Image generated: {response.data[0].url}")
+except openai.APIError as e:
+    print(f"API error: {e}")
+except openai.RateLimitError as e:
+    print(f"Rate limit exceeded: {e}")
+```
+
+## Pricing Examples
+
+Approximate costs per image:
+
+- **Flux 1 Schnell**: ~$0.003 per image (1024x1024)
+- **SDXL**: ~$0.002 per image (1024x1024)
+- **Imagen 4 Ultra**: ~$0.013 per image (1024x1024)
+- **Imagen 4 Fast**: ~$0.004 per image (1024x1024)
+
+<Info>
+Check your usage and costs in real-time through the [dashboard](https://dashboard.compilelabs.ai) or via the [Usage API](/billing).
+</Info>
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="OpenAI Examples" icon="code" href="/examples/openai">
+Learn OpenAI API examples
+</Card>
+
+<Card title="Anthropic Examples" icon="code" href="/examples/anthropic">
+Learn Anthropic API examples
+</Card>
+
+<Card title="Image Generation" icon="image" href="/modalities/image-generation">
+Deep dive into image generation
+</Card>
+
+<Card title="Text Models" icon="message-lines" href="/text-models">
+Browse available text models
+</Card>
+
+</CardGroup>
+

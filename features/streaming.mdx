@@ -1,0 +1,76 @@
+---
+title: "Streaming"
+description: "Real-time streaming responses for better UX"
+icon: "stream"
+---
+
+## Overview
+
+Streaming enables real-time delivery of AI responses as they're generated, token by token, rather than waiting for the complete response. This creates a more responsive and engaging user experience, especially for longer responses.
+
+## How Streaming Works
+
+When you enable streaming on a chat completion request, the model begins sending response chunks immediately as it generates them. Each chunk contains a small piece of the response (typically a few tokens), which your application can display progressively. The stream continues until the model completes the response or reaches a stopping condition.
+
+Instead of a single large payload at the end, you receive a continuous flow of data delivered via Server-Sent Events (SSE), allowing you to update your UI incrementally as tokens arrive.
+
+## Benefits of Streaming
+
+- **Improved Perceived Performance**: Users see responses begin immediately, reducing perceived latency even for long completions.
+- **Better User Experience**: Progressive display mimics natural conversation flow and keeps users engaged.
+- **Reduced Time to First Token**: Start showing results within milliseconds rather than waiting for complete generation.
+- **Responsive Interfaces**: Build chat interfaces that feel fluid and interactive, similar to popular AI assistants.
+- **Early Cancellation**: Allow users to stop generation mid-stream if they've seen enough or want to rephrase.
+
+## Use Cases
+
+- **Conversational Interfaces**: Chat applications where users expect immediate, flowing responses
+- **Long-Form Content**: Essays, articles, or explanations where waiting for completion would feel sluggish
+- **Code Generation**: Display code as it's written, allowing developers to review while generation continues
+- **Real-Time Assistants**: Customer support bots that need to feel responsive and human-like
+- **Interactive Storytelling**: Narrative experiences where progressive reveal enhances engagement
+
+## Chat Streaming
+
+Enable streaming for chat completions:
+
+```bash
+curl https://api.compilelabs.ai/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "moonshotai/kimi-k2-0905",
+    "messages": [{"role": "user", "content": "Tell me a story"}],
+    "stream": true
+  }'
+```
+
+## Technical Details
+
+### Response Format
+
+Streaming responses use the Server-Sent Events (SSE) protocol. Each event contains a JSON chunk with partial response data. Your client receives these chunks sequentially and can process them as they arrive.
+
+### Stream Lifecycle
+
+1. **Initiation**: Request begins with `stream: true` parameter
+2. **Token Generation**: Model generates and sends tokens incrementally
+3. **Chunk Delivery**: Each chunk arrives via SSE as soon as it's available
+4. **Completion Signal**: Final chunk includes a `finish_reason` indicating why generation stopped
+5. **Connection Close**: Stream ends and connection is closed
+
+### Compatibility
+
+Streaming works with all major AI models on Compile Labs, including OpenAI, Anthropic, Google, Meta, and open source models like Qwen, DeepSeek, and Llama. The same streaming interface works across all providers through our unified API.
+
+## Next Steps
+
+<CardGroup cols={2}>
+<Card title="Webhooks" icon="bell" href="/features/webhooks">
+Get notifications for events
+</Card>
+<Card title="Usage Tracking" icon="chart-line" href="/billing">
+Monitor streaming usage
+</Card>
+</CardGroup>
+

@@ -1,0 +1,171 @@
+---
+title: "Image Models"
+description: "Browse all available image generation models"
+icon: "image"
+---
+
+## Overview
+
+Generate high-quality images from text prompts using advanced image generation models. All models are accessible through our unified API.
+
+## Black Forest Labs
+
+**Flux 1 Schnell**
+- Model ID: `black-forest-labs/flux-1-schnell`
+- Overview: High-speed image generation model balancing quality and performance. Ideal for rapid prototyping, batch processing, and applications needing quick results without sacrificing visual fidelity.
+- Output Size: 1024x1024
+- Pricing: $0.003 per megapixel
+- Status: Active
+
+**Flux Pro**
+- Model ID: `flux-pro/v1.1-ultra`
+- Overview: Premium-tier model offering superior image quality and advanced prompt understanding. Best for professional creative work, commercial projects, and applications demanding exceptional visual results.
+- Status: Active
+
+**Flux General**
+- Model ID: `flux-general`
+- Overview: General-purpose Flux model for versatile image creation. Ideal for varied content needs, from casual to semi-professional applications.
+- Status: Active
+
+**Flux LoRA**
+- Model ID: `flux-lora`
+- Overview: Customizable Flux model supporting fine-tuning. Perfect for specialized styles, brand consistency, and projects requiring specific aesthetic training.
+- Status: Active
+
+## Stability AI
+
+**Stable Diffusion XL**
+- Model ID: `stability/sdxl`
+- Overview: Stable Diffusion XL delivers high-resolution, detailed images with excellent prompt adherence. Perfect for professional artwork, detailed illustrations, and complex scene generation.
+- Output Size: 1024x1025
+- Pricing: $0.02 per megapixel
+- Status: Active
+
+**Stable Diffusion v3.5 Large**
+- Model ID: `stable-diffusion-v35-large`
+- Overview: Enhanced Stable Diffusion with improved detail and composition. Ideal for professional photography-style images, concept art, and high-fidelity visual content.
+- Status: Active
+
+## Qwen
+
+**Qwen Image**
+- Model ID: `qwen/qwen-image`
+- Overview: Versatile text-to-image model offering reliable quality for general-purpose image generation. Suitable for content creation, marketing materials, and diverse creative projects.
+- Output Size: 1024×1024
+- Pricing: $0.02 per megapixel
+- Status: Active
+
+## Google
+
+**Imagen 4 Ultra**
+- Model ID: `Google/imagen-4-ultra`
+- Overview: Premium Google model delivering photorealistic quality and exceptional detail. Best for high-end commercial work, professional photography replacement, and demanding creative projects.
+- Status: Active
+
+**Imagen 4 Fast**
+- Model ID: `Google/imagen-4-fast`
+- Overview: Speed-optimized Imagen variant maintaining strong quality. Perfect for production workflows, content pipelines, and applications balancing quality with performance.
+- Status: Active
+
+**Gemini 2.5 Flash Image**
+- Model ID: `gemini-25-flash-image`
+- Overview: Fast, efficient image generation for high-throughput needs. Ideal for rapid prototyping, social media content, and applications requiring quick turnaround.
+- Status: Active
+
+## Nano Banana
+
+**Nano Banana**
+- Model ID: `nano-banana`
+- Overview: Lightweight, efficient model for quick image generation. Perfect for low-latency applications, mobile integrations, and scenarios where resource efficiency is critical.
+- Status: Active
+
+## OpenAI
+
+**GPT Image**
+- Model ID: `gpt-image-1-mini`
+- Overview: Compact model for efficient image generation. Ideal for applications balancing performance with resource constraints and cost considerations.
+- Status: Active
+
+## Recraft
+
+**Recraft**
+- Model ID: `recraft/v2/text-to-image`
+- Overview: Previous generation Recraft with solid performance. Good for design work, brand assets, and cost-effective creative projects.
+- Status: Active
+
+## Ideogram
+
+**Ideogram**
+- Model ID: `ideogram/v2`
+- Overview: Specialized in text rendering within images. Perfect for generating logos, posters, signage, and any visuals requiring accurate typography.
+- Status: Active
+
+## HiDream
+
+**HiDream Full**
+- Model ID: `hidream-i1-full`
+- Overview: Full-featured model delivering high-quality, detailed images. Best for projects requiring refined aesthetics and complex visual compositions.
+- Status: Active
+
+**HiDream Fast**
+- Model ID: `hidream-i1-fast`
+- Overview: Optimized for speed while maintaining good quality. Perfect for real-time applications, rapid iteration, and high-volume generation workflows.
+- Status: Active
+
+## Bria
+
+**Bria**
+- Model ID: `bria/text-to-image/3.2`
+- Overview: Commercially-licensed model safe for business use. Ideal for enterprises requiring copyright-clear images for advertising, e-commerce, and commercial content.
+- Status: Active
+
+## ByteDance
+
+**Seedream**
+- Model ID: `bytedance/seedream/v4/text-to-image`
+- Overview: Advanced model with strong prompt interpretation. Excellent for creative exploration, artistic projects, and nuanced visual storytelling.
+- Status: Active
+
+## Reve
+
+**Reve**
+- Model ID: `reve/text-to-image`
+- Overview: Emerging model offering unique aesthetic qualities. Suitable for experimental projects, artistic endeavors, and distinctive visual styles.
+- Status: Active
+
+## Listing Image Models
+
+Get a complete list of all available image generation models via API:
+
+```bash
+curl "https://api.compilelabs.ai/v1/models?type=text_to_image" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Model Status
+
+- **Active**: Currently available for use
+- **Pending**: Under review / not yet available
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="Image Generation Guide" icon="image" href="/modalities/image-generation">
+Learn how to generate images
+</Card>
+
+<Card title="Text Models" icon="comments" href="/text-models">
+Browse text generation models
+</Card>
+
+<Card title="Providers" icon="layer-group" href="/providers">
+Learn about our AI providers
+</Card>
+
+<Card title="Examples" icon="code" href="/examples">
+See code examples
+</Card>
+
+</CardGroup>
+
